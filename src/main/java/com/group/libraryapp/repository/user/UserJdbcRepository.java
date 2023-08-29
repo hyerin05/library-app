@@ -5,13 +5,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
-public class UserRepository { // sql을 사용해 실제 db와 통신을 담당
+public class UserJdbcRepository { // sql을 사용해 실제 db와 통신을 담당
 
     private JdbcTemplate jdbcTemplate;
 
-    public UserRepository(JdbcTemplate jdbcTemplate) {
+    public UserJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
     public void saveUser(String name, Integer age) {
