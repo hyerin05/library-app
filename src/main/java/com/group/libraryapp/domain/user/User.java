@@ -1,6 +1,10 @@
 package com.group.libraryapp.domain.user;
 
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -12,6 +16,9 @@ public class User {
     @Column(nullable = false, length = 20) // 객체의 name과 table의 name을 mapping
     private String name;
     private Integer age;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 
     protected User() {
 
@@ -33,6 +40,14 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public void updateName(String name) {
+        this.name = name;
+    }
+
+    public void loanBook(String bookName) {
+        this.userLoanHistories.add(new UserLoanHistory(this, bookName));
     }
 }
 
