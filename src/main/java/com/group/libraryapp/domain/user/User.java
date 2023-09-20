@@ -8,34 +8,38 @@ import java.util.List;
 
 
 @Entity
+// 객체와 테이블을 같은 것으로 생각한다.
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id =null;
-    @Column(nullable = false, length = 20) // 객체의 name과 table의 name을 mapping
+    private Long id = null;
+
+    @Column(nullable = false, length = 20) // name varchar(20)
     private String name;
     private Integer age;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 
     protected User() {
-
+        // JPA를 사용하기 위해서는 기본 생성자가 꼭 필요하다
     }
 
-    public User(String name, Integer age) {
-        if(name == null || name.isBlank()) { // name이 null이거나 name이 비어있다면
-            throw new IllegalArgumentException(String.format("잘못된 name(%s)이 들어왔습니다", name));
-        } //예외
-        this.name = name;
-        this.age = age;
-    }
     public String getName() {
         return name;
     }
+
     public Integer getAge() {
         return age;
+    }
+
+    public User(String name, Integer age) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException(String.format("잘못된 name(%s)이 들어왔습니다.", name));
+        }
+        this.name = name;
+        this.age = age;
     }
 
     public Long getId() {
@@ -44,10 +48,6 @@ public class User {
 
     public void updateName(String name) {
         this.name = name;
-    }
-
-    public void loanBook(String bookName) {
-        this.userLoanHistories.add(new UserLoanHistory(this, bookName));
     }
 }
 

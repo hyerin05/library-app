@@ -3,6 +3,7 @@ package com.group.libraryapp.controller.user;
 import com.group.libraryapp.dto.user.requset.UserCreateRequest;
 import com.group.libraryapp.dto.user.requset.UserUpdateRequest;
 import com.group.libraryapp.dto.user.response.UserResponse;
+import com.group.libraryapp.service.user.UserServiceV1;
 import com.group.libraryapp.service.user.UserServiceV2;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,25 +16,21 @@ public class UserController {
     public UserController(UserServiceV2 userService) {
         this.userService = userService;
     }
-    @PostMapping("/user") //POST /user
+    @PostMapping("/user")
     public void saveUser(@RequestBody UserCreateRequest request) {
         userService.saveUser(request);
     }
-
     @GetMapping("/user")
-    public List<UserResponse> getUsers() { // Users를 userResponse로 바꿔서 반환
+    public List<UserResponse> getUsers() {
         return userService.getUsers();
     }
-
-    @PutMapping("/user") // 수정
-    public void updateUser(@RequestBody UserUpdateRequest request) {
-     userService.updateUser(request);
+    @PutMapping("/user")
+    private void updateUser(@RequestBody UserUpdateRequest request) {
+        userService.updateUser(request);
     }
 
-    @DeleteMapping("/user") // 삭제
-    public void deleteUser(@RequestParam String name) {
+    @DeleteMapping("/user")
+    public void deleteUser(@RequestParam String name) { // name이라는 키를 가진 쿼리가 여기로 들어옴
         userService.deleteUser(name);
-
     }
-
 }
