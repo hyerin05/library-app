@@ -27,8 +27,8 @@ spring:
       on-profile: dev
   datasource:
     url: "jdbc:mysql://15.165.203.170:3306/library"
-    username: "hyerin"
-    password: "Abcd1234!"
+    username: "root"
+    password: "1234"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
