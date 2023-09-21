@@ -28,7 +28,7 @@ spring:
   datasource:
     url: "jdbc:mysql://15.165.203.170:3306/library"
     username: "hyerin"
-    password: "1234"
+    password: "Abcd1234!"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
